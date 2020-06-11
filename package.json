@@ -1,0 +1,27 @@
+{
+  "name": "bitmap-text-sample",
+  "version": "1.0.0",
+  "description": "pixi.js BitmapText sample",
+  "main": "index.js",
+  "dependencies": {
+    "@pixi/text-bitmap": "^5.2.4",
+    "pixi.js": "^5.2.4"
+  },
+  "devDependencies": {
+    "raw-loader": "^4.0.0",
+    "url-loader": "^3.0.0",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.11"
+  },
+  "scripts": {
+    "start": "npm run dev",
+    "dev": "webpack -w",
+    "build": "webpack",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "pixi.js"
+  ],
+  "author": "pentamania",
+  "license": "WTFPL"
+}

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="author" content="pentamania">
+  <meta http-equiv="x-ua-compatible" content="IE=Edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+  <title>pixi.bitmapText traditional style</title>
+</head>
+<body>
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/pixi.js/5.2.0/pixi.min.js'></script>
+<script>
+  // App生成
+  const app = new PIXI.Application({
+    width: 512,
+    height: 512,
+    backgroundColor: 0x1099bb,
+    resolution: window.devicePixelRatio || 1,
+    antialias: true,
+  });
+  document.body.appendChild(app.view);
+
+  // フォントのロード
+  const loader = new PIXI.Loader()
+  loader.add('SampleFont', './src/assets/aldrich-bitmap32x32.fnt')
+    .load(() => {
+      let bmtext = new PIXI.BitmapText('Hello Bitmap Font', {
+        font: {
+          name: 'Aldrich', // fntファイルの'face'に指定されたラベル
+          size: 64,
+        },
+        align: 'center', // 文字の整列位置。複数行のときのみ有効
+        tint: 0xffffff,
+      })
+      bmtext.anchor.set(0.5)
+      bmtext.position.x = app.screen.width / 2
+      bmtext.position.y = app.screen.height / 2
+      app.stage.addChild(bmtext)
+    })
+</script>
+</body>
+</html>
