@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="author" content="pentamania">
+  <meta http-equiv="x-ua-compatible" content="IE=Edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+  <title>pixi.bitmapText dynamic style</title>
+</head>
+<body>
+
+<script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/pixi.js/5.3.0/pixi.min.js'></script>
+<script>
+  // v5.3以降使える方法
+  // @see  https://jsfiddle.net/bigtimebuddy/wt9szqp6/
+  
+  // 使うフォント
+  const myfont = "Metal Mania"
+
+  // App生成
+  const app = new PIXI.Application({
+    resizeTo : window
+  });
+  document.body.appendChild(app.view);
+
+  // webfont.jsによるフォントのロードを待つ
+  const afterFontLoad = ()=> {
+    // bitmap fontの動的作成・登録
+    PIXI.BitmapFont.from(
+      myfont, // BitmapTextの`fontName`として使用する登録名：本来のフォント名でなくても良い
+      {
+        fontFamily: myfont, // 忘れないこと
+        fill: "#333333",
+        fontSize: 40,
+        fontWeight: 'bold',
+        dropShadow: true,
+        dropShadowAngle: 1,
+        dropShadowColor: "#ffffff",
+        dropShadowAlpha: 1,
+        dropShadowDistance: 1,
+      }, 
+      { resolution: devicePixelRatio }
+    );
+
+    // ビットマップフォント
+    const bmText = new PIXI.BitmapText(
+      'Hello World', // 表示テキスト
+      { 
+        fontName: myfont, // ビットマップフォント登録名を指定
+        fontSize: 80,
+      }
+    );
+    bmText.position.set(app.renderer.screen.width/2, app.renderer.screen.height/2)
+    bmText.anchor.set(0.5)
+    app.stage.addChild(bmText)
+  };
+
+  // webfont.jsでフォントロード
+  WebFont.load({
+    google: {
+      families: [ 
+        myfont
+      ]
+    },
+
+    loading: function() {
+      console.log('loading font...');
+    },
+
+    active: function() {
+      afterFontLoad()
+    },
+  });
+</script>
+</body>
+</html>
